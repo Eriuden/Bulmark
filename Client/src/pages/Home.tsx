@@ -87,6 +87,122 @@ const [url, setUrl] = useState("");
           </button>
         </form>
         </div>
+
+        {loading && (
+            <section className="loading-section">
+
+            <div className="loader"></div>
+
+            <h2>Analyse en cours...</h2>
+
+            <div className="loading-steps">
+
+                <p>✓ Vérification HTTPS</p>
+
+                <p>✓ Analyse des headers HTTP</p>
+
+                <p>✓ Inspection des cookies</p>
+
+                <p>✓ Calcul du score sécurité</p>
+
+            </div>
+
+            </section>
+        )}
+
+        {!loading && scanResult && (
+            <section className="results-section">
+
+            <div className="score-card">
+
+                <h2>Score de sécurité</h2>
+
+                <div
+                className="security-score"
+                style={{
+                    color: getScoreColor(),
+                }}
+                >
+                {scanResult.score}
+                <span>/100</span>
+                </div>
+
+                <p className="score-summary">
+                {scanResult.summary}
+                </p>
+
+            </div>
+
+            <div className="checks-container">
+
+                <h3>Résultats détaillés</h3>
+
+                {scanResult.checks.map(
+                (check, index) => (
+                    <div
+                    key={index}
+                    className="check-card"
+                    >
+                    <div className="check-header">
+
+                        <h4>{check.title}</h4>
+
+                        <span
+                        className="status-dot"
+                        style={{
+                            backgroundColor:
+                            getStatusColor(
+                                check.status
+                            ),
+                        }}
+                        ></span>
+
+                    </div>
+
+                    <p>{check.message}</p>
+
+                    </div>
+                )
+                )}
+
+            </div>
+
+            <div className="explanations-section">
+
+                <h3>
+                Pourquoi ces résultats sont importants ?
+                </h3>
+
+                <div className="explanation-card">
+
+                <h4>
+                    Content Security Policy (CSP)
+                </h4>
+
+                <p>
+                    Une politique CSP aide à protéger
+                    votre site contre les attaques XSS
+                    en limitant les scripts exécutables.
+                </p>
+
+                </div>
+
+                <div className="explanation-card">
+
+                <h4>Cookies sécurisés</h4>
+
+                <p>
+                    Les attributs SameSite, Secure et
+                    HttpOnly réduisent les risques de
+                    vol de session utilisateur.
+                </p>
+
+                </div>
+
+            </div>
+
+            </section>
+        )}
     </div>
   )
 }
