@@ -34,11 +34,38 @@ const [url, setUrl] = useState("");
     setLoading(true);
     setScanResult(null);
 
-    // Simulation backend
     setTimeout(() => {
-      setScanResult(Result);
+      setScanResult(result);
       setLoading(false);
     }, 3500);
+  };
+
+  const getScoreColor = () => {
+    if (!scanResult) return "#ffffff";
+
+    if (scanResult.score >= 80) return "#22c55e";
+
+    if (scanResult.score >= 50) return "#f59e0b";
+
+    return "#ef4444";
+  };
+
+  const getStatusColor = (
+    status: "good" | "warning" | "bad"
+  ) => {
+    switch (status) {
+      case "good":
+        return "#22c55e";
+
+      case "warning":
+        return "#f59e0b";
+
+      case "bad":
+        return "#ef4444";
+
+      default:
+        return "#ffffff";
+    }
   };
 
   return (
