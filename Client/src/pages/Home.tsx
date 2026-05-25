@@ -22,6 +22,25 @@ const [url, setUrl] = useState("");
     null
   );
 
+  //const result
+
+  const handleScan = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    if (!url.trim()) return;
+
+    setLoading(true);
+    setScanResult(null);
+
+    // Simulation backend
+    setTimeout(() => {
+      setScanResult(Result);
+      setLoading(false);
+    }, 3500);
+  };
+
   return (
     <div>Home</div>
   )
