@@ -69,6 +69,24 @@ const [url, setUrl] = useState("");
   };
 
   return (
-    <div>Home</div>
+    <div>
+        <div>
+            <form
+          className="scan-form"
+          onSubmit={handleScan}
+        >
+          <input
+            type="text"
+            placeholder="https://monsite.com"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+
+          <button type="submit">
+            Analyser
+          </button>
+        </form>
+        </div>
+    </div>
   )
 }
