@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import axios from "axios"
 
 export const Home = () => {
 
@@ -33,6 +34,8 @@ const [url, setUrl] = useState("");
 
     setLoading(true);
     setScanResult(null);
+
+    const result = axios.post("/api/scan")
 
     setTimeout(() => {
       setScanResult(result);
